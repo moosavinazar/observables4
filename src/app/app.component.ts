@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {fromEvent, map, take, tap} from "rxjs";
+import {fromEvent, map, take, takeWhile, tap} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,8 @@ export class AppComponent implements OnInit{
           y: item.offsetY
         }
       }),
-      take(5),
+      //take(5),
+      takeWhile(item => item.x < 1000),
       tap( i => console.log(i) )
     ).subscribe();
 
