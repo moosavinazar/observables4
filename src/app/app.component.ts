@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {fromEvent, map, tap} from "rxjs";
+import {fromEvent, map, take, tap} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -11,13 +11,13 @@ export class AppComponent implements OnInit{
 
     fromEvent(document, 'click').pipe(
       map(event => event as MouseEvent),
-      tap( i => console.log(i) ),
       map( item => {
         return {
           x: item.offsetX,
           y: item.offsetY
         }
       }),
+      take(5),
       tap( i => console.log(i) )
     ).subscribe();
 
